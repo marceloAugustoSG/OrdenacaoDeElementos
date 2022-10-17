@@ -1,33 +1,28 @@
-package Presenter;
+package com.mycompany.ordenacao.presenter;
 
+import Services.Arquivo;
 import Metodos.BubbleSort;
 import Metodos.Crescente;
 import Metodos.Decrescente;
 import Metodos.SelectionSort;
-import com.mycompany.odenacao.View.PrincipalView;
+import com.mycompany.ordenacao.view.OrdenacaoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class PrincipalPresenter {
+public class OrdenacaoPresenter {
 
-    private PrincipalView viewPrincipal;
-    private ArrayList<Integer> elementos;
+    private OrdenacaoView viewPrincipal;
+    private ArrayList<Double> elementos;
     long tempoInicial = 0, tempoFinal = 0;
 
-    public PrincipalPresenter() {
+    public OrdenacaoPresenter() {
 
-        viewPrincipal = new PrincipalView();
+        viewPrincipal = new OrdenacaoView();
         elementos = new ArrayList<>();
         desabilitarBtns();
         viewPrincipal.getBntOrdenar().setEnabled(false);
@@ -38,7 +33,7 @@ public class PrincipalPresenter {
                 elementos = new Arquivo().lerArquivo();
                 addListaSemOrdem(elementos);
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(PrincipalPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(OrdenacaoPresenter.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -53,7 +48,7 @@ public class PrincipalPresenter {
 
                 if (viewPrincipal.getCmbMetodo().getSelectedItem().toString() == "BubbleSort") {
                     tempoInicial = System.currentTimeMillis();
-                    new BubbleSort().calcular(elementos);
+                    new BubbleSort().ordenar(elementos);
                     tempoFinal = System.currentTimeMillis();
                     System.out.print("Bubble:");
                     System.out.printf("%.4f ms%n", (tempoFinal - tempoInicial) / 1000d);
@@ -63,7 +58,7 @@ public class PrincipalPresenter {
 
                 } else if (viewPrincipal.getCmbMetodo().getSelectedItem().toString() == "SelectionSort") {
                     tempoInicial = System.currentTimeMillis();
-                    new SelectionSort().calcular(elementos);
+                    new SelectionSort().ordenar(elementos);
                     tempoFinal = System.currentTimeMillis();
                     System.out.print("Selection:");
                     System.out.printf("%.4f ms%n", (tempoFinal - tempoInicial) / 1000d);
@@ -78,14 +73,14 @@ public class PrincipalPresenter {
         viewPrincipal.getRbtnDecrescente().addActionListener((ActionEvent e) -> {
 
             limparLista();
-            new Decrescente().calcular(elementos);
+            new Decrescente().ordenar(elementos);
             addListaOrdenada(elementos);
         });
 
         viewPrincipal.getRbtnCrescente().addActionListener((ActionEvent e) -> {
             limparLista();
 
-            new Crescente().calcular(elementos);
+            new Crescente().ordenar(elementos);
             addListaOrdenada(elementos);
         });
 
@@ -98,18 +93,18 @@ public class PrincipalPresenter {
     }
 
 //funcoes tela principal
-    public void addListaOrdenada(ArrayList<Integer> elementos) {
-        for (Iterator<Integer> iterator = elementos.iterator(); iterator.hasNext();) {
-            Integer next = iterator.next();
-            viewPrincipal.getLstOrdenados().add(Integer.toString(next));
+    public void addListaOrdenada(ArrayList<Double> elementos) {
+        for (Iterator<Double> iterator = elementos.iterator(); iterator.hasNext();) {
+            Double next = iterator.next();
+            viewPrincipal.getLstOrdenados().add(Double.toString(next));
 
         }
     }
 
-    public void addListaSemOrdem(ArrayList<Integer> elementos) {
-        for (Iterator<Integer> iterator = elementos.iterator(); iterator.hasNext();) {
-            Integer next = iterator.next();
-            viewPrincipal.getLslSemOrdenacao().add(Integer.toString(next));
+    public void addListaSemOrdem(ArrayList<Double> elementos) {
+        for (Iterator<Double> iterator = elementos.iterator(); iterator.hasNext();) {
+            Double next = iterator.next();
+            viewPrincipal.getLslSemOrdenacao().add(Double.toString(next));
         }
     }
 

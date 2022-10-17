@@ -5,8 +5,9 @@ import java.util.ArrayList;
 public class SelectionSort implements IMetodo {
 
     @Override
-    public ArrayList<Integer> calcular(ArrayList<Integer> numeros) {
-        int posicao_menor, aux;
+    public ArrayList<Double> ordenar(ArrayList<Double> numeros) {
+        int posicao_menor;
+        double aux;
         for (int i = 0; i < numeros.size(); i++) {
             posicao_menor = i;
             for (int j = i + 1; j < numeros.size(); j++) {

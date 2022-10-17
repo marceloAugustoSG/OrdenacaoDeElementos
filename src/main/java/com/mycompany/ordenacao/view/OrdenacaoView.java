@@ -1,4 +1,4 @@
-package com.mycompany.odenacao.View;
+package com.mycompany.ordenacao.view;
 
 import java.awt.List;
 import javax.swing.JButton;
@@ -6,9 +6,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
-public class PrincipalView extends javax.swing.JFrame {
+public class OrdenacaoView extends javax.swing.JFrame {
 
-    public PrincipalView() {
+    public OrdenacaoView() {
         initComponents();
         this.setLocationRelativeTo(this.getParent());
         setResizable(false);
